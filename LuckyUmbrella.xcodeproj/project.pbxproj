@@ -14,6 +14,7 @@
 		E915F61D1EE7CCB3006DB91A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E915F61C1EE7CCB3006DB91A /* MapKit.framework */; };
 		E915F61F1EE7CCD9006DB91A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E915F61E1EE7CCD9006DB91A /* CoreLocation.framework */; };
 		E915F66E1EE931A2006DB91A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E915F66D1EE931A2006DB91A /* Podfile */; };
+		E973E2241F04FF2F00557886 /* NewsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E973E2231F04FF2F00557886 /* NewsDetailVC.m */; };
 		E9BA3D381EE547CC00B6A740 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BA3D371EE547CC00B6A740 /* main.m */; };
 		E9BA3D3B1EE547CC00B6A740 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BA3D3A1EE547CC00B6A740 /* AppDelegate.m */; };
 		E9BA3D411EE547CC00B6A740 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9BA3D3F1EE547CC00B6A740 /* Main.storyboard */; };
@@ -84,6 +85,8 @@
 		E915F61C1EE7CCB3006DB91A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E915F61E1EE7CCD9006DB91A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E915F66D1EE931A2006DB91A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E973E2221F04FF2F00557886 /* NewsDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailVC.h; sourceTree = "<group>"; };
+		E973E2231F04FF2F00557886 /* NewsDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailVC.m; sourceTree = "<group>"; };
 		E98774381EF3E60800C6720C /* LuckyUmbrella.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuckyUmbrella.pch; sourceTree = "<group>"; };
 		E9BA3D331EE547CC00B6A740 /* LuckyUmbrella.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuckyUmbrella.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9BA3D371EE547CC00B6A740 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -397,6 +400,8 @@
 				E9EF91431F0367BC00E1CE3A /* NewsVC.m */,
 				E90213F31F04F8650087BDE8 /* NewsCVCell.h */,
 				E90213F41F04F8650087BDE8 /* NewsCVCell.m */,
+				E973E2221F04FF2F00557886 /* NewsDetailVC.h */,
+				E973E2231F04FF2F00557886 /* NewsDetailVC.m */,
 			);
 			path = NewsVC;
 			sourceTree = "<group>";
@@ -703,6 +708,7 @@
 				E9EF917E1F03687200E1CE3A /* SpecialCollectionView.m in Sources */,
 				E9EF91811F03687200E1CE3A /* SpecialView.m in Sources */,
 				E9EF917B1F03687200E1CE3A /* UIView+Extension.m in Sources */,
+				E973E2241F04FF2F00557886 /* NewsDetailVC.m in Sources */,
 				E9EF91441F0367BC00E1CE3A /* CouponVC.m in Sources */,
 				E9EF91511F0367BC00E1CE3A /* MyNewsVC.m in Sources */,
 				E9BA3D381EE547CC00B6A740 /* main.m in Sources */,

@@ -10,4 +10,9 @@
 
 @interface NewsCVCell : UICollectionViewCell
 
+/**
+ 活动详情图片
+ */
+@property (weak, nonatomic) IBOutlet UIImageView *ActivityImage;
+
 @end

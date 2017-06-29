@@ -1337,8 +1337,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ffh-Cb-fdT">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ffh-Cb-fdT">
                                                     <rect key="frame" x="10.333333333333343" y="8" width="393.33333333333337" height="144"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                             </subviews>
                                         </view>
@@ -1348,8 +1353,15 @@
                                             <constraint firstItem="ffh-Cb-fdT" firstAttribute="width" secondItem="pdA-pR-FeS" secondAttribute="width" multiplier="0.95" id="iyl-jC-xSc"/>
                                             <constraint firstItem="ffh-Cb-fdT" firstAttribute="centerX" secondItem="pdA-pR-FeS" secondAttribute="centerX" id="s3K-Dv-tF7"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="ActivityImage" destination="ffh-Cb-fdT" id="xne-oE-TPx"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="ogw-rv-poF" id="Wa0-3M-S3o"/>
+                                    <outlet property="delegate" destination="ogw-rv-poF" id="uko-GQ-Op0"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1362,8 +1374,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="活动中心" id="OrU-EG-jcw"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="NewsCV" destination="Mly-Vc-zll" id="k0g-Lh-ED7"/>
+                        <segue destination="D2s-ur-4PR" kind="show" identifier="NewsDetailVCPush" id="Gw0-kc-fwC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UYc-4b-1NK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1784,6 +1802,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Xr-mR-qIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2029" y="137"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="mrw-BW-ItK">
+            <objects>
+                <viewController id="D2s-ur-4PR" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5xv-gR-Pk7"/>
+                        <viewControllerLayoutGuide type="bottom" id="9s7-en-5ct"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3IF-lG-AZK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zjf-5Q-EKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2687" y="137"/>
         </scene>
         <!--个人-->
         <scene sceneID="ZeA-cd-lfc">

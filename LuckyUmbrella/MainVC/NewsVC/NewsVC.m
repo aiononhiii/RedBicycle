@@ -18,7 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.self
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -26,14 +27,44 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - UICollectionViewDataSource And Delegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 15;
 }
-*/
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake(_NewsCV.width,_NewsCV.height / 5);
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NewsCVCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"NewsCVCell" forIndexPath:indexPath];
+
+    cell.ActivityImage.backgroundColor = LGFRandomColor;
+    
+    return cell;
+    
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self performSegueWithIdentifier:@"NewsDetailVCPush" sender:self];
+    
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if([segue.identifier isEqualToString:@"NewsDetailVCPush"]){
+        
+//        MyScheduleDetailVC *msdvc = segue.destinationViewController;
+//        
+//        NSIndexPath *indexPath = _MyScheduleCV.indexPathsForSelectedItems.lastObject;
+//        
+//        msdvc.DataDict = _MyScheduleArray[indexPath.item];
+        
+    }
+    
+}
 
 @end

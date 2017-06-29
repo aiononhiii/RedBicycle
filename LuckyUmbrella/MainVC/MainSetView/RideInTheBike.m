@@ -21,6 +21,7 @@
 
     //初始化计时中心
     CenterTimer = [XTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(RideInTheBikeRun) userInfo:nil repeats:true];
+    
 }
 
 - (void)didReceiveMemoryWarning {
