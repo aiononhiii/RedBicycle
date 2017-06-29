@@ -1,0 +1,176 @@
+//
+//  LuckyUmbrella.pch
+//  LuckyUmbrella
+//
+//  Created by LGF on 2017/6/16.
+//  Copyright © 2017年 LGF. All rights reserved.
+//
+
+#ifndef LuckyUmbrella_pch
+#define LuckyUmbrella_pch
+
+//#import "SealAFNetworking.h"     //请求工具
+//#import "WKAvoidKeyboardViewController.h" //键盘
+//#import "LGFTableViewAvoidKeyboard.h"
+//#import "LWLCollectionViewHorizontalLayout.h"//横向显示
+
+#import "UIView+Extension.h"  //frame 工具
+#import "NSDate+Extension.h"  //日期 类
+
+#import "UIColor+UIColor.h"
+
+#import "XTimer.h"
+
+#import "MBProgressHUD+MJ.h"
+
+#import "AuxiliaryMethod.h"
+
+#import "SetView.h"
+
+//特殊处理view
+#import "SpecialButton.h"
+#import "SpecialView.h"
+#import "SpecialTextField.h"
+#import "SpecialLabel.h"
+
+//#import "MBProgressHUD+MJ.h"  //提示工具
+//#import "MBProgressHUD.h"
+
+//#import "MJExtension.h"       //转模型
+//#import "MJRefresh.h"         //刷新控件
+//
+//#import "NITRefreshInit.h"
+//
+//#import "LGFBarChart.h"//柱状图
+//#import "LGFLineChart.h"//折线图
+//
+//#import "LGFClandar.h"//日历
+//
+//#import "ColorSelectionCV.h"//色板
+//
+//#import "NoDataLabel.h"//没数据提示用标题
+//
+//#import "TimeOutReloadButton.h"//请求超时，重新请求按钮
+//
+//#import "LGFNullCheck.h"
+//
+//#import "UnderlineView.h"//线条view
+
+//获取版本
+#define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
+#define CurrentSystemVersion [[UIDevice currentDevice] systemVersion]
+
+//判断是真机还是模拟器
+#if TARGET_OS_IPHONE
+//iPhone Device
+#endif
+
+//获取当前语言
+#define CurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
+
+#if TARGET_IPHONE_SIMULATOR
+//iPhone Simulator
+#endif
+
+//G－C－D
+#define BACK(block) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{block})
+
+#define GROUP(block) dispatch_group_async(dispatch_group_create(), dispatch_get_global_queue(0,0), ^{block})
+
+#define GROUPNOTIFY(block) dispatch_group_notify(dispatch_group_create(), dispatch_get_global_queue(0,0), ^{block});
+
+#define MAIN(block) dispatch_async(dispatch_get_main_queue(),^{block})
+
+#define AFTER(time,block) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{block})
+
+#define GLOBAL(block) dispatch_async(dispatch_get_global_queue(0, 0),^{block})
+
+//由角度获取弧度 有弧度获取角度
+#define degreesToRadian(x) (M_PI * (x) / 180.0)
+#define radianToDegrees(radian) (radian*180.0)/(M_PI)
+
+//弱引用/强引用
+#define kWeakSelf(type)  __weak typeof(type) weak##type = type;
+#define kStrongSelf(type) __strong typeof(type) type = weak##type;
+
+//方正黑体简体字体定义
+#define FONT(F) [UIFont fontWithName:@"FZHTJW--GB1-0" size:F]
+
+//程序的本地化,引用国际化的文件
+#define MyLocal(x, ...) NSLocalizedString(x, nil)
+
+// 获取方法耗时时间
+#define TICK   CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
+#define TOCK   NSLog(@"Time: %f", CFAbsoluteTimeGetCurrent() - start)
+
+//登录者参数
+#define SYSTEM_USER_DICT [NITFilePath stringByAppendingPathComponent:@"SYSTEMUSERDICT.plist"]
+
+//ios 10 判断
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+#define SYSREM_VERSION(v) [[UIDevice currentDevice].systemVersion doubleValue] >= v
+
+//沙盒路径
+#define LGFFilePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
+
+//xcode沙河路径
+
+//RGB颜色
+#define LGFColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+
+#define LGFColorAlpha(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)/1.0]
+
+//随机色
+#define LGFRandomColor LGFColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
+
+//小菊花
+#define LGFNetwork LGFApplication.networkActivityIndicatorVisible
+
+//通知
+#define LGFNotificationCenter [NSNotificationCenter defaultCenter]
+
+//user缓存
+#define LGFUserDefaults [NSUserDefaults standardUserDefaults]
+
+//Window宽高
+#define LGFScreenW [UIScreen mainScreen].bounds.size.width
+#define LGFScreenH [UIScreen mainScreen].bounds.size.height
+
+//当前视图
+#define LGFLastView LGFApplication.windows.firstObject
+
+//keyWindow
+#define LGFKeyWindow LGFApplication.keyWindow
+
+//[UIApplication sharedApplication]
+#define LGFApplication [UIApplication sharedApplication]
+
+//定位服务状态
+#define LGFAuthorizationStatus [CLLocationManager authorizationStatus]
+
+//Main storyboard
+#define MainSB [UIStoryboard storyboardWithName:@"Main" bundle:nil]
+
+//字符串是否为空
+#define LGFStringIsEmpty(str) ([str isKindOfClass:[NSNull class]] || str == nil || [str length] < 1 ? YES : NO )
+
+//数组是否为空
+#define LGFArrayIsEmpty(array) (array == nil || [array isKindOfClass:[NSNull class]] || array.count == 0)
+
+//字典是否为空
+#define LGFDictIsEmpty(dic) (dic == nil || [dic isKindOfClass:[NSNull class]] || dic.allKeys == 0)
+
+//是否是空对象
+#define kObjectIsEmpty(_object) (_object == nil \
+|| [_object isKindOfClass:[NSNull class]] \
+|| ([_object respondsToSelector:@selector(length)] && [(NSData *)_object length] == 0) \
+|| ([_object respondsToSelector:@selector(count)] && [(NSArray *)_object count] == 0))/
+
+#define TotalDay 6 //可滑动总天数
+#define TotalWeek 4 //可滑动总周数
+
+#define SystemColor(alpha) LGFColorAlpha(255.0, 62.0, 123.0,(alpha))
+
+#define NSNullJudge(str) (str)==[NSNull null] ? @"" : (str)
+#endif /* LuckyUmbrella_pch */
