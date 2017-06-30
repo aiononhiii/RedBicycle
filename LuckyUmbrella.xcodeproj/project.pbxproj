@@ -16,6 +16,7 @@
 		E915F66E1EE931A2006DB91A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E915F66D1EE931A2006DB91A /* Podfile */; };
 		E973E2241F04FF2F00557886 /* NewsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E973E2231F04FF2F00557886 /* NewsDetailVC.m */; };
 		E973E2271F05F15500557886 /* UserSetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E973E2261F05F15500557886 /* UserSetVC.m */; };
+		E973E22A1F062CD000557886 /* LGFUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E973E2291F062CD000557886 /* LGFUploadImage.m */; };
 		E9BA3D381EE547CC00B6A740 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BA3D371EE547CC00B6A740 /* main.m */; };
 		E9BA3D3B1EE547CC00B6A740 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BA3D3A1EE547CC00B6A740 /* AppDelegate.m */; };
 		E9BA3D411EE547CC00B6A740 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9BA3D3F1EE547CC00B6A740 /* Main.storyboard */; };
@@ -89,6 +90,8 @@
 		E973E2231F04FF2F00557886 /* NewsDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailVC.m; sourceTree = "<group>"; };
 		E973E2251F05F15500557886 /* UserSetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSetVC.h; sourceTree = "<group>"; };
 		E973E2261F05F15500557886 /* UserSetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSetVC.m; sourceTree = "<group>"; };
+		E973E2281F062CD000557886 /* LGFUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFUploadImage.h; sourceTree = "<group>"; };
+		E973E2291F062CD000557886 /* LGFUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGFUploadImage.m; sourceTree = "<group>"; };
 		E98774381EF3E60800C6720C /* LuckyUmbrella.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuckyUmbrella.pch; sourceTree = "<group>"; };
 		E9BA3D331EE547CC00B6A740 /* LuckyUmbrella.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuckyUmbrella.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9BA3D371EE547CC00B6A740 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -466,6 +469,8 @@
 				E9EF91741F03687200E1CE3A /* CLLocation+Sino.m */,
 				E9EF91771F03687200E1CE3A /* XTimer.h */,
 				E9EF91781F03687200E1CE3A /* XTimer.m */,
+				E973E2281F062CD000557886 /* LGFUploadImage.h */,
+				E973E2291F062CD000557886 /* LGFUploadImage.m */,
 				E9EF91751F03687200E1CE3A /* MBProgressHUD+MJ.h */,
 				E9EF91761F03687200E1CE3A /* MBProgressHUD+MJ.m */,
 				E90213F11F038E0C0087BDE8 /* MBProgressHUD.bundle */,
@@ -704,6 +709,7 @@
 				E9EF91521F0367BC00E1CE3A /* MyScheduleCVCell.m in Sources */,
 				E9EF91531F0367BC00E1CE3A /* MyScheduleDetailVC.m in Sources */,
 				E9EF917D1F03687200E1CE3A /* SpecialButton.m in Sources */,
+				E973E22A1F062CD000557886 /* LGFUploadImage.m in Sources */,
 				E9BA3D3B1EE547CC00B6A740 /* AppDelegate.m in Sources */,
 				E9EF917E1F03687200E1CE3A /* SpecialCollectionView.m in Sources */,
 				E9EF91811F03687200E1CE3A /* SpecialView.m in Sources */,

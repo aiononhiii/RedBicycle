@@ -10,8 +10,10 @@
 
 #define RealHeight (self.tableView.height - 64)
 
-@interface UserSetVC ()
+@interface UserSetVC () <UploadImageDelegate>
+
 @property (weak, nonatomic) IBOutlet UIView *LogoutView;
+@property (weak, nonatomic) IBOutlet UIImageView *UserImage;
 
 @end
 
@@ -33,6 +35,19 @@
 - (IBAction)Logout:(UIButton *)sender {
     
     
+    
+    
+}
+
+- (IBAction)UserImageButtonClick:(UIButton *)sender {
+    
+    [LGFUPLOAD_IMAGE showActionSheetInFatherViewController:self SelectButton:sender];
+    
+}
+
+-(void)uploadImageToServerWithImage:(UIImage *)image SelectButton:(UIButton *)SelectButton{
+    
+    [_UserImage setImage:image];
     
 }
 

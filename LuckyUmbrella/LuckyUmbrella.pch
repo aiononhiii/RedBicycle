@@ -23,6 +23,8 @@
 
 #import "MBProgressHUD+MJ.h"
 
+#import "LGFUploadImage.h" //调用相机相册获取图片
+
 #import "AuxiliaryMethod.h"
 
 #import "SetView.h"

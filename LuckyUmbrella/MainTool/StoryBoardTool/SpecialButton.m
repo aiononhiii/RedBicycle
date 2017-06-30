@@ -80,7 +80,7 @@
     
     if (cornerRadius == 222.0) {
         
-        self.layer.cornerRadius = (self.height * 0.95) / 2;
+        self.layer.cornerRadius = self.height / 2;
         
     } else {
         

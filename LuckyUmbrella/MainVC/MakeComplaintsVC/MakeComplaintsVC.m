@@ -10,7 +10,7 @@
 
 #define RealHeight (self.tableView.height - 64)
 
-@interface MakeComplaintsVC ()
+@interface MakeComplaintsVC () <UploadImageDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *MakeComplaintsTypeOne;//私锁私用
 @property (weak, nonatomic) IBOutlet UIButton *MakeComplaintsTypeTwo;//车牌缺损
@@ -24,6 +24,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *LicensePlate;//车牌号
 @property (weak, nonatomic) IBOutlet UITextField *Remarks;//备注
 
+@property (weak, nonatomic) IBOutlet UIButton *CameraOne;
+@property (weak, nonatomic) IBOutlet UIButton *CameraTwo;
+@property (weak, nonatomic) IBOutlet UIButton *CameraThree;
+@property (weak, nonatomic) IBOutlet UIButton *CameraFour;
+
+@property (nonatomic, strong) NSArray<UIButton *> *CameraArray;//相机图片数组
 @property (nonatomic, strong) NSArray<UIButton *> *MakeComplaintsTypeButtonArray;//吐槽按钮数组
 @property (nonatomic, strong) NSMutableArray<NSString *> *MakeComplaintsTypeArray;//吐槽数组
 @end
@@ -35,11 +41,36 @@
     
     _MakeComplaintsTypeButtonArray = @[_MakeComplaintsTypeOne, _MakeComplaintsTypeTwo, _MakeComplaintsTypeThree, _MakeComplaintsTypeFour, _MakeComplaintsTypeFive, _MakeComplaintsTypeSix, _MakeComplaintsTypeSeven, _MakeComplaintsTypeEight];
     
+    _CameraArray = @[_CameraOne,_CameraTwo,_CameraThree,_CameraFour];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)CameraClick:(UIButton *)sender {
+    
+    [LGFUPLOAD_IMAGE showActionSheetInFatherViewController:self SelectButton:sender];
+
+}
+
+-(void)uploadImageToServerWithImage:(UIImage *)image SelectButton:(UIButton *)SelectButton{
+
+    if (SelectButton == _CameraOne) {
+        
+        [_CameraTwo setHidden:NO];
+        
+    } else if (SelectButton == _CameraTwo) {
+        
+        [_CameraThree setHidden:NO];
+        
+    } else if (SelectButton == _CameraThree) {
+        
+        [_CameraFour setHidden:NO];
+        
+    }
+    
 }
 
 - (IBAction)MakeComplaintsTypeClick:(UIButton *)sender {
