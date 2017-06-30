@@ -174,29 +174,53 @@
     
     //如果未授权则请求
     
-    if(LGFAuthorizationStatus == kCLAuthorizationStatusDenied) {
+    if ([CLLocationManager locationServicesEnabled] == NO) {
+
+        UIAlertController *Alert = [UIAlertController alertControllerWithTitle:@"" message:@"请为手机开启定位服务" preferredStyle:UIAlertControllerStyleAlert];
         
-        if (SYSREM_VERSION(10.0)) {
+        [Alert addAction:[UIAlertAction actionWithTitle:@"残忍拒绝" style:UIAlertActionStyleDestructive handler:nil]];
+        
+        [Alert addAction:[UIAlertAction actionWithTitle:@"现在就去" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
-            UIAlertController *Alert = [UIAlertController alertControllerWithTitle:@"" message:@"请为小红车开启定位服务" preferredStyle:UIAlertControllerStyleAlert];
-            
-            [Alert addAction:[UIAlertAction actionWithTitle:@"残忍拒绝" style:UIAlertActionStyleDestructive handler:nil]];
-            
-            [Alert addAction:[UIAlertAction actionWithTitle:@"现在就去" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            if([LGFApplication canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]) {
                 
-                if([LGFApplication canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]) {
-                    
-                    [LGFApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
-                    
-                }
+                [LGFApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
                 
-            }]];
+            }
             
-            [SelfViewController presentViewController:Alert animated:NO completion:nil];
-            
-        }
+        }]];
+        
+        [SelfViewController presentViewController:Alert animated:NO completion:nil];
         
         return YES;
+        
+    } else {
+        
+        if(LGFAuthorizationStatus == kCLAuthorizationStatusDenied || LGFAuthorizationStatus == kCLAuthorizationStatusRestricted) {
+            
+            if (SYSREM_VERSION(10.0)) {
+                
+                UIAlertController *Alert = [UIAlertController alertControllerWithTitle:@"" message:@"请为小红车开启定位服务" preferredStyle:UIAlertControllerStyleAlert];
+                
+                [Alert addAction:[UIAlertAction actionWithTitle:@"残忍拒绝" style:UIAlertActionStyleDestructive handler:nil]];
+                
+                [Alert addAction:[UIAlertAction actionWithTitle:@"现在就去" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    
+                    if([LGFApplication canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]) {
+                        
+                        [LGFApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
+                        
+                    }
+                    
+                }]];
+                
+                [SelfViewController presentViewController:Alert animated:NO completion:nil];
+                
+            }
+            
+            return YES;
+            
+        }
         
     }
     

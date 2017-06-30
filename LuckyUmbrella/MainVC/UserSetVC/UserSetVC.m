@@ -2,14 +2,16 @@
 //  UserSetVC.m
 //  LuckyUmbrella
 //
-//  Created by LGF on 17/6/13.
+//  Created by totyu3 on 2017/6/30.
 //  Copyright © 2017年 LGF. All rights reserved.
 //
 
 #import "UserSetVC.h"
 
+#define RealHeight (self.tableView.height - 64)
+
 @interface UserSetVC ()
-@property (weak, nonatomic) IBOutlet UIButton *CloseButton;
+@property (weak, nonatomic) IBOutlet UIView *LogoutView;
 
 @end
 
@@ -17,25 +19,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-- (IBAction)CloseUserSet:(id)sender {
-    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+/**
+ 退出登录
+ */
+- (IBAction)Logout:(UIButton *)sender {
+    
+    
+    
 }
-*/
+
+#pragma mark - Table view data source
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.row == 0) {
+        
+        return RealHeight * 0.3;
+        
+    } else if (indexPath.row == 7) {
+        
+        return RealHeight * 0.04;
+        
+    }
+    
+    return RealHeight * 0.07;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return RealHeight * 0.1;
+    
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    return _LogoutView;
+    
+}
 
 @end

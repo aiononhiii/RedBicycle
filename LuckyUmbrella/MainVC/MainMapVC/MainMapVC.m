@@ -275,14 +275,20 @@
         //设置定位属性
         _LocationManager.desiredAccuracy = kCLLocationAccuracyBest;
         
-        _LocationManager.distanceFilter = 10;
+        _LocationManager.distanceFilter = kCLDistanceFilterNone;
         
         _LocationManager.pausesLocationUpdatesAutomatically = NO;
         
+        [_LocationManager startUpdatingHeading];
+        
+        _LocationManager.allowsBackgroundLocationUpdates = YES;
+        
         //设置定位更新距离militer
+        
         _LocationManager.distanceFilter = 10.0;
         
         //绑定定位委托
+        
         _LocationManager.delegate = self;
         
         /**设置用户请求服务*/

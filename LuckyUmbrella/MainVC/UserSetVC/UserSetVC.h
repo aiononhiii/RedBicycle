@@ -2,12 +2,12 @@
 //  UserSetVC.h
 //  LuckyUmbrella
 //
-//  Created by LGF on 17/6/13.
+//  Created by totyu3 on 2017/6/30.
 //  Copyright © 2017年 LGF. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface UserSetVC : UIViewController
+@interface UserSetVC : UITableViewController
 
 @end

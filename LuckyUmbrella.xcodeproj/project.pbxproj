@@ -15,6 +15,7 @@
 		E915F61F1EE7CCD9006DB91A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E915F61E1EE7CCD9006DB91A /* CoreLocation.framework */; };
 		E915F66E1EE931A2006DB91A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E915F66D1EE931A2006DB91A /* Podfile */; };
 		E973E2241F04FF2F00557886 /* NewsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E973E2231F04FF2F00557886 /* NewsDetailVC.m */; };
+		E973E2271F05F15500557886 /* UserSetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E973E2261F05F15500557886 /* UserSetVC.m */; };
 		E9BA3D381EE547CC00B6A740 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BA3D371EE547CC00B6A740 /* main.m */; };
 		E9BA3D3B1EE547CC00B6A740 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BA3D3A1EE547CC00B6A740 /* AppDelegate.m */; };
 		E9BA3D411EE547CC00B6A740 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9BA3D3F1EE547CC00B6A740 /* Main.storyboard */; };
@@ -41,7 +42,6 @@
 		E9EF91541F0367BC00E1CE3A /* MyScheduleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E9EF913D1F0367BC00E1CE3A /* MyScheduleVC.m */; };
 		E9EF91551F0367BC00E1CE3A /* MyWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E9EF91401F0367BC00E1CE3A /* MyWalletVC.m */; };
 		E9EF91561F0367BC00E1CE3A /* NewsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E9EF91431F0367BC00E1CE3A /* NewsVC.m */; };
-		E9EF915A1F03680F00E1CE3A /* UserSetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E9EF91591F03680F00E1CE3A /* UserSetVC.m */; };
 		E9EF91791F03687200E1CE3A /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E9EF915E1F03687200E1CE3A /* NSDate+Extension.m */; };
 		E9EF917A1F03687200E1CE3A /* UIColor+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E9EF91601F03687200E1CE3A /* UIColor+UIColor.m */; };
 		E9EF917B1F03687200E1CE3A /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E9EF91621F03687200E1CE3A /* UIView+Extension.m */; };
@@ -87,6 +87,8 @@
 		E915F66D1EE931A2006DB91A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E973E2221F04FF2F00557886 /* NewsDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailVC.h; sourceTree = "<group>"; };
 		E973E2231F04FF2F00557886 /* NewsDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailVC.m; sourceTree = "<group>"; };
+		E973E2251F05F15500557886 /* UserSetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSetVC.h; sourceTree = "<group>"; };
+		E973E2261F05F15500557886 /* UserSetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSetVC.m; sourceTree = "<group>"; };
 		E98774381EF3E60800C6720C /* LuckyUmbrella.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuckyUmbrella.pch; sourceTree = "<group>"; };
 		E9BA3D331EE547CC00B6A740 /* LuckyUmbrella.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuckyUmbrella.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9BA3D371EE547CC00B6A740 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -140,8 +142,6 @@
 		E9EF91401F0367BC00E1CE3A /* MyWalletVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWalletVC.m; sourceTree = "<group>"; };
 		E9EF91421F0367BC00E1CE3A /* NewsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsVC.h; sourceTree = "<group>"; };
 		E9EF91431F0367BC00E1CE3A /* NewsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsVC.m; sourceTree = "<group>"; };
-		E9EF91581F03680F00E1CE3A /* UserSetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSetVC.h; sourceTree = "<group>"; };
-		E9EF91591F03680F00E1CE3A /* UserSetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSetVC.m; sourceTree = "<group>"; };
 		E9EF915D1F03687200E1CE3A /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
 		E9EF915E1F03687200E1CE3A /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
 		E9EF915F1F03687200E1CE3A /* UIColor+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+UIColor.h"; sourceTree = "<group>"; };
@@ -409,8 +409,8 @@
 		E9EF91571F03680F00E1CE3A /* UserSetVC */ = {
 			isa = PBXGroup;
 			children = (
-				E9EF91581F03680F00E1CE3A /* UserSetVC.h */,
-				E9EF91591F03680F00E1CE3A /* UserSetVC.m */,
+				E973E2251F05F15500557886 /* UserSetVC.h */,
+				E973E2261F05F15500557886 /* UserSetVC.m */,
 			);
 			path = UserSetVC;
 			sourceTree = "<group>";
@@ -687,6 +687,7 @@
 				E9EF917C1F03687200E1CE3A /* SetView.m in Sources */,
 				E9EF91841F03687200E1CE3A /* MBProgressHUD+MJ.m in Sources */,
 				E9EF91851F03687200E1CE3A /* XTimer.m in Sources */,
+				E973E2271F05F15500557886 /* UserSetVC.m in Sources */,
 				E9EF91481F0367BC00E1CE3A /* MainMapVC.m in Sources */,
 				E9EF91451F0367BC00E1CE3A /* GuideToUseVC.m in Sources */,
 				E9EF914B1F0367BC00E1CE3A /* ManualInput.m in Sources */,
@@ -699,7 +700,6 @@
 				E9EF91461F0367BC00E1CE3A /* InvitingFriendsVC.m in Sources */,
 				E9EF91561F0367BC00E1CE3A /* NewsVC.m in Sources */,
 				E9EF914F1F0367BC00E1CE3A /* ScanCode.m in Sources */,
-				E9EF915A1F03680F00E1CE3A /* UserSetVC.m in Sources */,
 				E9EF91541F0367BC00E1CE3A /* MyScheduleVC.m in Sources */,
 				E9EF91521F0367BC00E1CE3A /* MyScheduleCVCell.m in Sources */,
 				E9EF91531F0367BC00E1CE3A /* MyScheduleDetailVC.m in Sources */,

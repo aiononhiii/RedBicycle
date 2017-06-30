@@ -46,7 +46,7 @@
     
     sender.selected = !sender.selected;
     
-    sender.layer.borderWidth = sender.selected ? 0.0 : 1.0;
+    sender.layer.borderWidth = sender.selected ? 0.0 : 0.3;
 
     [_SubmitButton setEnabled:NO];
     
@@ -66,109 +66,30 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 0) {
+    if (indexPath.row == 0 || indexPath.row == 2) {
         
-        return RealHeight * 0.08;
+        return RealHeight * 0.1;
         
-    }
-    
-    return RealHeight * 0.16;
-    
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    if (section == 0 || section == 1) {
+    } else if (indexPath.row == 1) {
         
-        return RealHeight * 0.08;
+        return RealHeight * 0.3;
         
-    } else if(section == 2) {
+    } else if (indexPath.row == 3) {
         
-        return RealHeight * 0.04;
+        return RealHeight * 0.16;
         
-    }
-    
-    return 0;
-    
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    CGFloat SectionHeight = RealHeight * 0.08;
-    
-    NSString *SectionTitle = @"";
-    
-    if (section == 0) {
+    } else if (indexPath.row == 4) {
         
-        SectionTitle = @"👍请选择故障类型";
-
-    } else if (section == 1) {
+        return RealHeight * 0.06;
         
-        SectionTitle = @"📷拍摄单车周围环境，便于维修师傅找车";
-
-    } else {
+    } else if (indexPath.row == 7) {
         
-        SectionHeight = 0;
+        return RealHeight * 0.12;
         
     }
-
-    return [AuxiliaryMethod MakeSectionViewWithHeight:SectionHeight Text:SectionTitle];
+    
+    return RealHeight * 0.08;
     
 }
-
-
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -36,7 +36,7 @@
         
         //添加扫描动画
         
-        ScanCodeTimer = [XTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(ScanCodeImageAnimation) userInfo:nil repeats:true];
+        ScanCodeTimer = [XTimer scheduledTimerWithTimeInterval:0.7 target:self selector:@selector(ScanCodeImageAnimation) userInfo:nil repeats:true];
         
         //初始化扫描界面
         
@@ -59,7 +59,7 @@
 
 - (void)ScanViewAnimation {
     
-    [UIView animateWithDuration:1.0 animations:^{
+    [UIView animateWithDuration:0.7 animations:^{
         
         _ScanView.alpha = 1.0;
         
@@ -75,7 +75,7 @@
 
 - (void)ScanCodeImageAnimation {
 
-    [UIView animateWithDuration:1.4 delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
+    [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
         
         _ScanCodeImageHeight.constant = self.view.height * 0.43;
         
@@ -83,7 +83,7 @@
         
     } completion:^(BOOL finished) {
         
-        [UIView animateWithDuration:0.6 animations:^{
+        [UIView animateWithDuration:0.4 animations:^{
            
             _ScanCodeImage.alpha = 0.0;
             
