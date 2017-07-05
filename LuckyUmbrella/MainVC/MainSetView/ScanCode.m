@@ -26,23 +26,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [CATransaction setCompletionBlock: ^{
-        
-        //判断相机权限是否打开
-        
-        if ([AuxiliaryMethod CameraAuthorizationRequest:self]) return;
-        
-        [self ScanViewAnimation];
-        
-        //添加扫描动画
-        
-        ScanCodeTimer = [XTimer scheduledTimerWithTimeInterval:0.7 target:self selector:@selector(ScanCodeImageAnimation) userInfo:nil repeats:true];
-        
-        //初始化扫描界面
-        
-        [self startReading];
-        
-    }];
+    //判断相机权限是否打开
+    
+    if ([AuxiliaryMethod CameraAuthorizationRequest:self]) return;
+    
+    [self ScanViewAnimation];
+    
+    //添加扫描动画
+    
+    ScanCodeTimer = [XTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(ScanCodeImageAnimation) userInfo:nil repeats:true];
+    
+    //初始化扫描界面
+    
+    GLOBAL([self startReading];);
     
 }
 
@@ -50,16 +46,22 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     
     [self stopReading];
     
 }
 
+- (void)dealloc {
+    
+    NSLog(@"二维码扫描页释放");
+    
+}
+
 - (void)ScanViewAnimation {
     
-    [UIView animateWithDuration:0.7 animations:^{
+    [UIView animateWithDuration:1.2 animations:^{
         
         _ScanView.alpha = 1.0;
         
@@ -75,7 +77,7 @@
 
 - (void)ScanCodeImageAnimation {
 
-    [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
+    [UIView animateWithDuration:1.4 delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
         
         _ScanCodeImageHeight.constant = self.view.height * 0.43;
         
@@ -83,7 +85,7 @@
         
     } completion:^(BOOL finished) {
         
-        [UIView animateWithDuration:0.4 animations:^{
+        [UIView animateWithDuration:0.8 animations:^{
            
             _ScanCodeImage.alpha = 0.0;
             
@@ -165,12 +167,18 @@
     [_videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
     
     [_videoPreviewLayer setFrame:self.view.layer.bounds];
-    
-    [self.view.layer insertSublayer:_videoPreviewLayer atIndex:0];
-    
+
     //开始会话
     
-    [_captureSession startRunning];
+    MAIN(
+         
+         [self.view.layer insertSublayer:_videoPreviewLayer atIndex:0];
+         
+         [_captureSession startRunning];
+         
+    );
+    
+    
 
 }
 

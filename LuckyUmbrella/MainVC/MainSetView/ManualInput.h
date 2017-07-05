@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @protocol ManualInputView<NSObject>
 
 /**
@@ -18,6 +19,16 @@
  点击扫二维码回调
  */
 - (void)ShowScanCode;
+
+/**
+ 如果隐藏键盘
+ */
+- (void)ShowManualInputWithKeyboardHeight:(CGFloat)KeyboardHeight;
+
+/**
+ 如果开启键盘
+ */
+- (void)ShowManualInput;
 
 @end
 

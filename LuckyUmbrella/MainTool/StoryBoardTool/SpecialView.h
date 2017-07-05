@@ -10,6 +10,8 @@
 IB_DESIGNABLE
 @interface SpecialView : UIView
 
+@property (nonatomic, strong) IBInspectable NSString *SetViewID;
+
 @property (nonatomic ,assign) IBInspectable UIColor *borderColor;
 
 @property (nonatomic , assign) IBInspectable CGFloat borderWidth;

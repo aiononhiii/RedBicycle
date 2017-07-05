@@ -258,4 +258,33 @@
     return NO;
     
 }
+
++ (UIViewController *)ShowView:(SpecialView *)View SelfVC:(id)SelfVC {
+    
+    if (View.alpha == 0) {
+        
+        UIViewController *VC = SelfVC;
+        
+        [VC.childViewControllers makeObjectsPerformSelector:@selector(willMoveToParentViewController:)];
+        
+        [VC.childViewControllers makeObjectsPerformSelector:@selector(removeFromParentViewController)];
+        
+        [View.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        
+        UIViewController *ViewSB = [MainSB instantiateViewControllerWithIdentifier:View.SetViewID];
+        
+        ViewSB.view.frame = View.bounds;
+        
+        [VC addChildViewController:ViewSB];
+        
+        [View addSubview:ViewSB.view];
+        
+        return ViewSB;
+        
+    }
+    
+    return nil;
+    
+}
+
 @end

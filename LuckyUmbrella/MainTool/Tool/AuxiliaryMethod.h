@@ -12,6 +12,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "SpecialView.h"
+
 @interface AuxiliaryMethod : NSObject
 
 /**
@@ -60,4 +62,14 @@
  @param SelfViewController push alert 的控制器
  */
 + (BOOL)CameraAuthorizationRequest:(id)SelfViewController;
+
+/**
+ 添加子控制器
+
+ @param View 用于添加子控制器的view
+ @param SelfVC 父控制器
+ @return 子控制器
+ */
++ (UIViewController *)ShowView:(SpecialView *)View SelfVC:(id)SelfVC;
+
 @end

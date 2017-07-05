@@ -24,6 +24,17 @@
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+}
+
+- (void)dealloc {
+    
+    NSLog(@"支付页释放");
+    
+}
+
 - (IBAction)ConfirmPayment:(UIButton *)sender {
     
     [self.delegate ShowMainSetView];

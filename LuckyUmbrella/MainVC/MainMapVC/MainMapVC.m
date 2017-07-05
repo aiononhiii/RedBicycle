@@ -33,6 +33,8 @@
 {
     CLLocation *NewSelfLocation;//最新经纬度
     BOOL StartOrEndRiding;//是否开始骑行， yes : 开始骑行 no : 结束骑行
+    BOOL LocationUpdateBool;//10秒定位一次用 Bool
+    XTimer *LocationUpdateTimer;//10秒定位一次用 Timer
 }
 /**
  地图view
@@ -44,6 +46,10 @@
  最新标注点，大头针
  */
 @property (weak, nonatomic) IBOutlet SpecialButton *NewLocationPoint;
+/**
+ 客服小女孩
+ */
+@property (weak, nonatomic) IBOutlet UIButton *LittleRedGirl;
 /**
  当前位置view
  */
@@ -63,17 +69,17 @@
 /**
  设置view子页
  */
-@property (weak, nonatomic) IBOutlet UIView *SetViewMainView;//设置view主页
+@property (weak, nonatomic) IBOutlet SpecialView *SetViewMainView;//设置view主页
 
-@property (weak, nonatomic) IBOutlet UIView *PasswordView;//开锁密码页
+@property (weak, nonatomic) IBOutlet SpecialView *PasswordView;//开锁密码页
 
-@property (weak, nonatomic) IBOutlet UIView *RideInTheBikeView;//自行车骑行中页
+@property (weak, nonatomic) IBOutlet SpecialView *RideInTheBikeView;//自行车骑行中页
 
-@property (strong, nonatomic) IBOutlet UIView *ManualInputView;//手动输入页
+@property (strong, nonatomic) IBOutlet SpecialView *ManualInputView;//手动输入页
 
-@property (weak, nonatomic) IBOutlet UIView *ScanCodeView;//二维码扫描页面
+@property (weak, nonatomic) IBOutlet SpecialView *ScanCodeView;//二维码扫描页面
 
-@property (weak, nonatomic) IBOutlet UIView *PaymentView;//付款页
+@property (weak, nonatomic) IBOutlet SpecialView *PaymentView;//付款页
 
 @property (weak, nonatomic) IBOutlet UIButton *UpDownButton;//上下箭头按钮
 /**
@@ -106,7 +112,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self ShowMainSetView];
+    StartOrEndRiding = NO;
+    
+    LocationUpdateBool = NO;
     
     [self selfLocationInit];
 
@@ -137,33 +145,34 @@
       @{@"latitude":@"30.150776",@"longitude":@"120.195314"},
       @{@"latitude":@"30.149505",@"longitude":@"120.192906"}
       ];
-        
-    //键盘监听
-    [LGFNotificationCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [LGFNotificationCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    [LGFNotificationCenter addObserver:self selector:@selector(DidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-
-}
-
--(void)DidBecomeActive {
-
-    [self selfLocationInit];
     
+    [LGFNotificationCenter addObserver:self selector:@selector(DidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
+    [LGFNotificationCenter addObserver:self selector:@selector(DidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+
+    [self ShowMainSetView];
     
-    [self MapViewSetRegion];
-    
+    [CATransaction setCompletionBlock: ^{
+        
+        [self MapViewSetRegion];
+        
+    }];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    
+    [self.view endEditing:YES];
     
 }
 
@@ -175,6 +184,75 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
+}
+
+/**
+ app进入前台
+ */
+- (void)DidBecomeActive {
+    
+    [self selfLocationInit];
+    
+}
+
+/**
+ app进入后台
+ */
+- (void)DidEnterBackground {
+    
+    if (!StartOrEndRiding) {
+        
+        [self DoStopUpdatingLocation];
+        
+        [LocationUpdateTimer invalidate];
+        
+    }
+    
+}
+
+/**
+ 暂停定位，方向
+ */
+- (void)DoStopUpdatingLocation {
+    
+    [self.LocationManager stopUpdatingLocation];
+    
+    [self.LocationManager stopUpdatingHeading];
+    
+}
+
+/**
+ 开始定位，方向
+ */
+- (void)DoStartUpdatingLocation {
+    
+    [self.LocationManager startUpdatingLocation];
+    
+    [self.LocationManager startUpdatingHeading];
+    
+}
+
+/**
+ 设置间隔10秒定位一次
+ */
+- (void)LocationUpdateTimer {
+    
+    LocationUpdateBool = !LocationUpdateBool;
+    
+    if (LocationUpdateBool) {
+    
+        [self DoStartUpdatingLocation];
+        
+        NSLog(@"开始定位");
+        
+    } else {
+        
+        [self DoStopUpdatingLocation];
+        
+        NSLog(@"结束定位");
+        
+    }
+    
 }
 
 #pragma mark 结束移动地图
@@ -279,8 +357,6 @@
         
         _LocationManager.pausesLocationUpdatesAutomatically = NO;
         
-        [_LocationManager startUpdatingHeading];
-        
         _LocationManager.allowsBackgroundLocationUpdates = YES;
         
         //设置定位更新距离militer
@@ -311,10 +387,18 @@
     }
 
     //请求开启定位服务
+    
     if ([AuxiliaryMethod LocateAuthorizationRequest:self]) return;
     
+    //设置间隔10秒定位一次
+    
+    [LocationUpdateTimer invalidate];
+    
+    LocationUpdateTimer = [XTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(LocationUpdateTimer) userInfo:nil repeats:true];
+    
     //开始定位
-    [self.LocationManager startUpdatingLocation];
+    
+    [self DoStartUpdatingLocation];
     
     NewSelfLocation = self.LocationManager.location;
     
@@ -329,9 +413,13 @@
  */
 - (void)MapViewSetRegion {
     
-    MKCoordinateRegion region = MKCoordinateRegionMake(NewSelfLocation.coordinate, MKCoordinateSpanMake(0.005,0.005));
     
-    [_MapView setRegion:region animated:YES];
+        
+        MKCoordinateRegion region = MKCoordinateRegionMake(NewSelfLocation.coordinate, MKCoordinateSpanMake(_MapView.height * 0.00001, _MapView.height * 0.00001));
+        
+        [_MapView setRegion:region animated:YES];
+        
+    
     
 }
 
@@ -340,6 +428,8 @@
 //定位后的返回结果
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    NSLog(@"定位中");
     
     //locations数组中存储的是CLLocation
     
@@ -521,6 +611,7 @@
     //2.查找路线
     //方向请求,设置起点,终点
     MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
+    request.transportType = MKDirectionsTransportTypeWalking;
     request.source = fromPm;
     request.destination = toPm;
     
@@ -846,20 +937,6 @@
         
     } completion:^(BOOL finished) {
         
-        //动画结束
-        
-        if (_ManualInputView.alpha == 0)  [_ManualInputView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        
-        if (_SetViewMainView.alpha == 0) [_SetViewMainView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        
-        if (_ScanCodeView.alpha == 0) [_ScanCodeView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        
-        if (_PasswordView.alpha == 0) [_PasswordView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        
-        if (_RideInTheBikeView.alpha == 0) [_RideInTheBikeView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        
-        if (_PaymentView.alpha == 0) [_PaymentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        
     }];
     
 }
@@ -961,17 +1038,15 @@
  */
 - (void)ShowPasswordUnlocked:(NSString *)result {
     
-    PasswordUnlocked *PasswordUnlockedViewSB = [MainSB instantiateViewControllerWithIdentifier:@"PasswordUnlockedViewSB"];
+    PasswordUnlocked *PasswordUnlockedVC = (PasswordUnlocked *)[AuxiliaryMethod ShowView:_PasswordView SelfVC:self];
     
-    PasswordUnlockedViewSB.view.frame = _PasswordView.bounds;
-    
-    PasswordUnlockedViewSB.UnlockedBicycleNumber.text = [NSString stringWithFormat:@"No.%@的解锁码",@"2333333"];
-    
-    PasswordUnlockedViewSB.delegate = self;
-    
-    [self addChildViewController:PasswordUnlockedViewSB];
-    
-    [_PasswordView addSubview:PasswordUnlockedViewSB.view];
+    if (PasswordUnlockedVC) {
+        
+        PasswordUnlockedVC.UnlockedBicycleNumber.text = [NSString stringWithFormat:@"No.%@的解锁码",@"2333333"];
+        
+        PasswordUnlockedVC.delegate = self;
+        
+    }
 
     [self SetViewSetConstant:-_SetView.height * 0.4 SetViewType:PasswordUnlockedPage];
     
@@ -1006,15 +1081,9 @@
     
     StartOrEndRiding = YES;
     
-    RideInTheBike *RideInTheBikeViewSB = [MainSB instantiateViewControllerWithIdentifier:@"RideInTheBikeViewSB"];
+    RideInTheBike *RideInTheBikeVC = (RideInTheBike *)[AuxiliaryMethod ShowView:_RideInTheBikeView SelfVC:self];
     
-    RideInTheBikeViewSB.view.frame = _RideInTheBikeView.bounds;
-    
-    RideInTheBikeViewSB.delegate = self;
-    
-    [self addChildViewController:RideInTheBikeViewSB];
-    
-    [_RideInTheBikeView addSubview:RideInTheBikeViewSB.view];
+    if (RideInTheBikeVC) RideInTheBikeVC.delegate = self;
     
     [self SetViewSetConstant:-_SetView.height * 0.4 SetViewType:RideInTheBikePage];
     
@@ -1042,19 +1111,15 @@
     
     StartOrEndRiding = NO;
     
-    Payment *PaymentViewSB = [MainSB instantiateViewControllerWithIdentifier:@"PaymentViewSB"];
+    Payment *PaymentVC = (Payment *)[AuxiliaryMethod ShowView:_PaymentView SelfVC:self];
     
-    PaymentViewSB.view.frame = _PaymentView.bounds;
-    
-    PaymentViewSB.delegate = self;
-    
-    [self addChildViewController:PaymentViewSB];
-    
-    [_PaymentView addSubview:PaymentViewSB.view];
+    if (PaymentVC) PaymentVC.delegate = self;
     
     [self SetViewSetConstant:-_SetView.height * 0.4 SetViewType:PaymentPage];
     
 }
+
+
 
 /**
  跳到扫二维码页面
@@ -1063,37 +1128,37 @@
     
     [self RemoveMKPolyline:@"导航路线"];
     
-    ScanCode *ScanCodeViewSB = [MainSB instantiateViewControllerWithIdentifier:@"ScanCodeViewSB"];
+    ScanCode *ScanCodeVC = (ScanCode *)[AuxiliaryMethod ShowView:_ScanCodeView SelfVC:self];
     
-    ScanCodeViewSB.view.frame = _ScanCodeView.bounds;
-    
-    ScanCodeViewSB.delegate = self;
-    
-    [self addChildViewController:ScanCodeViewSB];
-    
-    [_ScanCodeView addSubview:ScanCodeViewSB.view];
+    if (ScanCodeVC) ScanCodeVC.delegate = self;
     
     [self SetViewSetConstant:-_SetView.height SetViewType:ScanCodePage];
     
 }
-
 
 /**
  跳到手动输入页面
  */
 - (void)ShowManualInput {
     
-    ManualInput *ManualInputViewSB = [MainSB instantiateViewControllerWithIdentifier:@"ManualInputViewSB"];
+    ManualInput *ManualInputVC = (ManualInput *)[AuxiliaryMethod ShowView:_ManualInputView SelfVC:self];
     
-    ManualInputViewSB.view.frame = _ManualInputView.bounds;
-    
-    ManualInputViewSB.delegate = self;
-    
-    [self addChildViewController:ManualInputViewSB];
-    
-    [_ManualInputView addSubview:ManualInputViewSB.view];
-    
+    if (ManualInputVC) ManualInputVC.delegate = self;
+
     [self SetViewSetConstant:-_SetView.height * 0.4 SetViewType:ManualInputPage];
+    
+}
+
+/**
+ 手动输入页面键盘弹出
+ */
+- (void)ShowManualInputWithKeyboardHeight:(CGFloat)KeyboardHeight {
+    
+    ManualInput *ManualInputVC = (ManualInput *)[AuxiliaryMethod ShowView:_ManualInputView SelfVC:self];
+    
+    if (ManualInputVC) ManualInputVC.delegate = self;
+    
+    [self SetViewSetConstant:KeyboardHeight SetViewType:ManualInputPage];
     
 }
 
@@ -1102,21 +1167,11 @@
  */
 - (void)ShowMainSetView {
     
-    [CATransaction setCompletionBlock: ^{
-        
-        MainSet *MainSetViewSB = [MainSB instantiateViewControllerWithIdentifier:@"MainSetViewSB"];
-        
-        MainSetViewSB.view.frame = _SetViewMainView.bounds;
-        
-        MainSetViewSB.delegate = self;
-        
-        [self addChildViewController:MainSetViewSB];
-        
-        [_SetViewMainView addSubview:MainSetViewSB.view];
-        
-        [self SetViewSetConstant:-_SetView.height * 0.3 SetViewType:MainSetPage];
-        
-    }];
+    MainSet *MainSetVC = (MainSet *)[AuxiliaryMethod ShowView:_SetViewMainView SelfVC:self];
+    
+    if (MainSetVC) MainSetVC.delegate = self;
+    
+    [self SetViewSetConstant:-_SetView.height * 0.3 SetViewType:MainSetPage];
     
 }
 
@@ -1152,22 +1207,6 @@
     
     _UpDownButton.selected = Selected;
     
-}
-
-#pragma mark 键盘监听
-
-- (void)keyboardWillShow:(NSNotification *)note {
-    
-    CGFloat keyBoardheight = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
-    
-    [self SetViewSetConstant:-_SetView.height * 0.4 - keyBoardheight SetViewType:ManualInputPage];
-    
-}
-
-- (void)keyboardWillHide:(NSNotification *)note {
-
-    [self SetViewSetConstant:-_SetView.height * 0.4 SetViewType:ManualInputPage];
-
 }
 
 #pragma mark 手势代理 控制有效view

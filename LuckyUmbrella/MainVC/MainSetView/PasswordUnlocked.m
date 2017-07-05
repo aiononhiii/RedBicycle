@@ -27,11 +27,17 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     
     [CenterTimer invalidate];
     
+}
+
+- (void)dealloc {
+    
+    NSLog(@"密码解锁页释放");
+
 }
 
 /**

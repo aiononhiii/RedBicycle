@@ -77,14 +77,14 @@
 //G－C－D
 #define BACK(block) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{block})
 
-#define GROUP(block) dispatch_group_async(dispatch_group_create(), dispatch_get_global_queue(0,0), ^{block})
+#define GROUP(block) dispatch_group_async(dispatch_group_create(), dispatch_get_global_queue(0, 0), ^{block})
 
-#define GROUPNOTIFY(block) dispatch_group_notify(dispatch_group_create(), dispatch_get_global_queue(0,0), ^{block});
-
+#define GROUPNOTIFY(block) dispatch_group_notify(dispatch_group_create(), dispatch_get_global_queue(0, 0), ^{block});
+//主线程
 #define MAIN(block) dispatch_async(dispatch_get_main_queue(),^{block})
-
+//延时
 #define AFTER(time,block) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{block})
-
+//异步
 #define GLOBAL(block) dispatch_async(dispatch_get_global_queue(0, 0),^{block})
 
 //由角度获取弧度 有弧度获取角度

@@ -22,4 +22,14 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
+- (void)dealloc {
+    
+    NSLog(@"蓝牙开锁页释放");
+    
+}
+
 @end
