@@ -33,8 +33,6 @@
 {
     CLLocation *NewSelfLocation;//最新经纬度
     BOOL StartOrEndRiding;//是否开始骑行， yes : 开始骑行 no : 结束骑行
-    BOOL LocationUpdateBool;//10秒定位一次用 Bool
-    XTimer *LocationUpdateTimer;//10秒定位一次用 Timer
 }
 /**
  地图view
@@ -114,8 +112,6 @@
     
     StartOrEndRiding = NO;
     
-    LocationUpdateBool = NO;
-    
     [self selfLocationInit];
 
     //账户信息一览autolayout值初始化
@@ -183,7 +179,7 @@
 - (void)dealloc {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-
+    
 }
 
 /**
@@ -202,55 +198,8 @@
     
     if (!StartOrEndRiding) {
         
-        [self DoStopUpdatingLocation];
-        
-        [LocationUpdateTimer invalidate];
-        
-    }
-    
-}
+        [self.LocationManager stopUpdatingLocation];
 
-/**
- 暂停定位，方向
- */
-- (void)DoStopUpdatingLocation {
-    
-    [self.LocationManager stopUpdatingLocation];
-    
-    [self.LocationManager stopUpdatingHeading];
-    
-}
-
-/**
- 开始定位，方向
- */
-- (void)DoStartUpdatingLocation {
-    
-    [self.LocationManager startUpdatingLocation];
-    
-    [self.LocationManager startUpdatingHeading];
-    
-}
-
-/**
- 设置间隔10秒定位一次
- */
-- (void)LocationUpdateTimer {
-    
-    LocationUpdateBool = !LocationUpdateBool;
-    
-    if (LocationUpdateBool) {
-    
-        [self DoStartUpdatingLocation];
-        
-        NSLog(@"开始定位");
-        
-    } else {
-        
-        [self DoStopUpdatingLocation];
-        
-        NSLog(@"结束定位");
-        
     }
     
 }
@@ -351,13 +300,15 @@
         _LocationManager = [[CLLocationManager alloc] init];
         
         //设置定位属性
-        _LocationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _LocationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
         
         _LocationManager.distanceFilter = kCLDistanceFilterNone;
         
         _LocationManager.pausesLocationUpdatesAutomatically = NO;
         
         _LocationManager.allowsBackgroundLocationUpdates = YES;
+        
+        [_LocationManager startUpdatingHeading];
         
         //设置定位更新距离militer
         
@@ -390,15 +341,9 @@
     
     if ([AuxiliaryMethod LocateAuthorizationRequest:self]) return;
     
-    //设置间隔10秒定位一次
-    
-    [LocationUpdateTimer invalidate];
-    
-    LocationUpdateTimer = [XTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(LocationUpdateTimer) userInfo:nil repeats:true];
-    
     //开始定位
     
-    [self DoStartUpdatingLocation];
+    [self.LocationManager startUpdatingLocation];
     
     NewSelfLocation = self.LocationManager.location;
     
@@ -412,15 +357,11 @@
  设置地图显示该经纬度的位置
  */
 - (void)MapViewSetRegion {
+
+    MKCoordinateRegion region = MKCoordinateRegionMake(NewSelfLocation.coordinate, MKCoordinateSpanMake(_MapView.height * 0.00001, _MapView.height * 0.00001));
     
-    
-        
-        MKCoordinateRegion region = MKCoordinateRegionMake(NewSelfLocation.coordinate, MKCoordinateSpanMake(_MapView.height * 0.00001, _MapView.height * 0.00001));
-        
-        [_MapView setRegion:region animated:YES];
-        
-    
-    
+    [_MapView setRegion:region animated:YES];
+
 }
 
 #pragma mark CLLocationManagerDelegate

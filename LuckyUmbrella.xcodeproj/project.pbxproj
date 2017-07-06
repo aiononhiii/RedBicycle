@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		181B3B111EF663070007CF10 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181B3B101EF663070007CF10 /* AVFoundation.framework */; };
+		18C829261F0E6AF60094036A /* BillingInstructionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C829251F0E6AF60094036A /* BillingInstructionsVC.m */; };
 		7D3734AF5B2780730897F7EC /* libPods-LuckyUmbrella.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F9DAE4F48E3E0491318C0 /* libPods-LuckyUmbrella.a */; };
 		E90213F21F038E0C0087BDE8 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E90213F11F038E0C0087BDE8 /* MBProgressHUD.bundle */; };
 		E90213F51F04F8650087BDE8 /* NewsCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E90213F41F04F8650087BDE8 /* NewsCVCell.m */; };
@@ -77,6 +78,8 @@
 
 /* Begin PBXFileReference section */
 		181B3B101EF663070007CF10 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		18C829241F0E6AF60094036A /* BillingInstructionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillingInstructionsVC.h; sourceTree = "<group>"; };
+		18C829251F0E6AF60094036A /* BillingInstructionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillingInstructionsVC.m; sourceTree = "<group>"; };
 		5D5FFA2E43A936336DED4225 /* Pods-LuckyUmbrella.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuckyUmbrella.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuckyUmbrella/Pods-LuckyUmbrella.debug.xcconfig"; sourceTree = "<group>"; };
 		7A0F9DAE4F48E3E0491318C0 /* libPods-LuckyUmbrella.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LuckyUmbrella.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C04533F79E3132D849C8DF1B /* Pods-LuckyUmbrella.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuckyUmbrella.release.xcconfig"; path = "Pods/Target Support Files/Pods-LuckyUmbrella/Pods-LuckyUmbrella.release.xcconfig"; sourceTree = "<group>"; };
@@ -383,6 +386,8 @@
 				E9EF913B1F0367BC00E1CE3A /* MyScheduleDetailVC.m */,
 				E9EF913C1F0367BC00E1CE3A /* MyScheduleVC.h */,
 				E9EF913D1F0367BC00E1CE3A /* MyScheduleVC.m */,
+				18C829241F0E6AF60094036A /* BillingInstructionsVC.h */,
+				18C829251F0E6AF60094036A /* BillingInstructionsVC.m */,
 			);
 			path = MyScheduleVC;
 			sourceTree = "<group>";
@@ -703,6 +708,7 @@
 				E9EF914A1F0367BC00E1CE3A /* MainSet.m in Sources */,
 				E9EF91791F03687200E1CE3A /* NSDate+Extension.m in Sources */,
 				E9EF91461F0367BC00E1CE3A /* InvitingFriendsVC.m in Sources */,
+				18C829261F0E6AF60094036A /* BillingInstructionsVC.m in Sources */,
 				E9EF91561F0367BC00E1CE3A /* NewsVC.m in Sources */,
 				E9EF914F1F0367BC00E1CE3A /* ScanCode.m in Sources */,
 				E9EF91541F0367BC00E1CE3A /* MyScheduleVC.m in Sources */,
