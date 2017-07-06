@@ -1135,7 +1135,7 @@
     [self SetViewSetConstant:-_SetView.height SetViewType:ScanCodePage];
     
 }
-
+   
 /**
  跳到手动输入页面
  */
