@@ -28,8 +28,10 @@
 
 #import "AccountCell.h"
 
+#import "DestinationSearchVC.h"
+
 @interface MainMapVC ()<CLLocationManagerDelegate,ScanCodeView,ManualInputView
-,PasswordUnlockedView,RideInTheBikeView,PaymentView,MainSetView>
+,PasswordUnlockedView,RideInTheBikeView,PaymentView,MainSetView,DestinationSearchVCDelegate>
 {
     CLLocation *NewSelfLocation;//最新经纬度
     BOOL StartOrEndRiding;//是否开始骑行， yes : 开始骑行 no : 结束骑行
@@ -60,6 +62,11 @@
  调转到吐槽页面按钮
  */
 @property (weak, nonatomic) IBOutlet SpecialButton *ShowMakeComplaintsButton;
+/**
+ 目的地选择按钮
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ShowDestinationButtonLeft;
+@property (weak, nonatomic) IBOutlet SpecialButton *ShowDestinationButton;
 /**
  设置view
  */
@@ -153,13 +160,17 @@
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 
-    [self ShowMainSetView];
+    if (!StartOrEndRiding) {
     
-    [CATransaction setCompletionBlock: ^{
+        [self ShowMainSetView];
         
-        [self MapViewSetRegion];
+        [CATransaction setCompletionBlock: ^{
+            
+            [self MapViewSetRegion];
+            
+        }];
         
-    }];
+    }
 
 }
 
@@ -400,46 +411,19 @@
     
     [_MapView addAnnotation:pointAnnotation];
     
-    MKCircle *circle =[MKCircle circleWithCenterCoordinate:NewSelfLocation.coordinate radius:400];
-    
-    circle.title = @"装饰圈";
-    
-    //先添加，在回调方法中创建覆盖物
-    
-    [_MapView addOverlay:circle];
+//    MKCircle *circle =[MKCircle circleWithCenterCoordinate:NewSelfLocation.coordinate radius:20];
+//    
+//    circle.title = @"装饰圈";
+//    
+//    //先添加，在回调方法中创建覆盖物
+//    
+//    [_MapView addOverlay:circle];
     
     if (StartOrEndRiding) {
         
         [self StartRiding];
         
     }
-    
-//
-//    //设置地图显示该经纬度的位置
-//
-//    MKCoordinateRegion region =MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(0.01,0.01));
-//    
-//    [_MapView setRegion:region animated:YES];
-    
-//    //创建大头针
-//    
-//    MKPointAnnotation * pointAnnotation = [[MKPointAnnotation alloc] init];
-//    
-//    //设置经纬度
-//    
-//    pointAnnotation.coordinate = location.coordinate;
-//    
-//    //设置主标题
-//    
-//    pointAnnotation.title =@"我在这里";
-//    
-//    //设置副标题
-//    
-//    pointAnnotation.subtitle =@"hello world";
-//    
-//    //将大头针添加到地图上
-//    
-//    [_MapView addAnnotation:pointAnnotation];
     
 }
 
@@ -599,12 +583,6 @@
     
     AccountCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AccountCell" forIndexPath:indexPath];
     
-    UIView *bgview = [[UIView alloc]initWithFrame:cell.bounds];
-    
-    bgview.backgroundColor = LGFColorAlpha(255, 50, 100, 0.1);
-    
-    cell.selectedBackgroundView = bgview;
-    
     NSDictionary *AccountDict = _AccountArray[indexPath.row];
     
     [cell.AccountImage setImage:[UIImage imageNamed:AccountDict[@"accountimage"]]];
@@ -678,6 +656,11 @@
     }
     
 }
+- (IBAction)ShowDestinationSearchVC:(UIButton *)sender {
+    
+    [self performSegueWithIdentifier:@"DestinationSearchVCPush" sender:self];
+    
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
@@ -701,6 +684,14 @@
         
     } else if ([segue.identifier isEqualToString:@"NewsVCPush"]){
         
+    } else if ([segue.identifier isEqualToString:@"DestinationSearchVCPush"]){
+        
+        DestinationSearchVC *dsvc = segue.destinationViewController;
+        
+        dsvc.SuperRegion = _MapView.region;
+        
+        dsvc.delegate = self;
+        
     }
     
 }
@@ -721,7 +712,7 @@
  */
 - (IBAction)SelfLocation:(UIButton *)sender {
     
-    [self RemoveMKPolyline:@"导航路线"];
+    if (!StartOrEndRiding) [self RemoveMKPolyline:@"导航路线"];
     
     //请求开启定位服务
     if ([AuxiliaryMethod LocateAuthorizationRequest:self]) return;
@@ -791,20 +782,39 @@
  点击了小自行车
  */
 - (void)tapBicycle:(UITapGestureRecognizer *)sender {
-    
-    [self RemoveMKPolyline:@"导航路线"];
-    
+
     //调用系统导航
     
     MKAnnotationView *annotationView = (MKAnnotationView *)sender.view;
+    
+    [self SetStartEndLocation:annotationView.annotation.coordinate];
+    
+}
+
+/**
+ 选择了目的地
+ */
+-(void)ShowDestination:(MKMapItem *)mapItem {
+    
+    [self SetStartEndLocation:mapItem.placemark.coordinate];
+    
+}
+
+/**
+ 设置起点终点
+ */
+-(void)SetStartEndLocation:(CLLocationCoordinate2D)coordinate {
+    
+    [self RemoveMKPolyline:@"导航路线"];
     
     //起点
     //    MKMapItem *startLocation = [MKMapItem mapItemForCurrentLocation];
     MKMapItem *startLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:NewSelfLocation.coordinate addressDictionary:nil]];
     //终点
-    MKMapItem *endLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:annotationView.annotation.coordinate addressDictionary:nil]];
-
+    MKMapItem *endLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil]];
+    
     [self addLineFrom:startLocation to:endLocation];
+    
 }
 
 #pragma mark 页面动画实现方法
@@ -873,6 +883,8 @@
         _PaymentView.alpha = SetViewType == PaymentPage ? 1.0 : 0.0;
         
         _NewLocationPoint.alpha = SetViewType == RideInTheBikePage ? 0.0 : 1.0;
+        
+        _ShowDestinationButtonLeft.constant = SetViewType == RideInTheBikePage ? - self.view.width * 0.4 : 0.0;
         
         [self.view layoutIfNeeded];
         
@@ -1066,9 +1078,7 @@
  跳到扫二维码页面
  */
 - (void)ShowScanCode {
-    
-    [self RemoveMKPolyline:@"导航路线"];
-    
+
     ScanCode *ScanCodeVC = (ScanCode *)[AuxiliaryMethod ShowView:_ScanCodeView SelfVC:self];
     
     if (ScanCodeVC) ScanCodeVC.delegate = self;
@@ -1107,6 +1117,8 @@
  跳到初始设置页
  */
 - (void)ShowMainSetView {
+    
+    [self RemoveMKPolyline:@"导航路线"];
     
     MainSet *MainSetVC = (MainSet *)[AuxiliaryMethod ShowView:_SetViewMainView SelfVC:self];
     

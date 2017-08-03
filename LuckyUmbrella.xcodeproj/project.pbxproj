@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18044D451F20D7CE00E1702F /* DestinationSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18044D441F20D7CE00E1702F /* DestinationSearchVC.m */; };
+		18044D481F20DA1200E1702F /* DestinationSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18044D471F20DA1200E1702F /* DestinationSearchCell.m */; };
 		181B3B111EF663070007CF10 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181B3B101EF663070007CF10 /* AVFoundation.framework */; };
+		182BD5F11F1F9C4A00C65448 /* NavigationBarAuToAlphaForTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BD5F01F1F9C4A00C65448 /* NavigationBarAuToAlphaForTableVC.m */; };
 		18C829261F0E6AF60094036A /* BillingInstructionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C829251F0E6AF60094036A /* BillingInstructionsVC.m */; };
 		7D3734AF5B2780730897F7EC /* libPods-LuckyUmbrella.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F9DAE4F48E3E0491318C0 /* libPods-LuckyUmbrella.a */; };
 		E90213F21F038E0C0087BDE8 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E90213F11F038E0C0087BDE8 /* MBProgressHUD.bundle */; };
@@ -77,7 +80,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18044D431F20D7CE00E1702F /* DestinationSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DestinationSearchVC.h; sourceTree = "<group>"; };
+		18044D441F20D7CE00E1702F /* DestinationSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DestinationSearchVC.m; sourceTree = "<group>"; };
+		18044D461F20DA1200E1702F /* DestinationSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DestinationSearchCell.h; sourceTree = "<group>"; };
+		18044D471F20DA1200E1702F /* DestinationSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DestinationSearchCell.m; sourceTree = "<group>"; };
 		181B3B101EF663070007CF10 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		182BD5EF1F1F9C4A00C65448 /* NavigationBarAuToAlphaForTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarAuToAlphaForTableVC.h; sourceTree = "<group>"; };
+		182BD5F01F1F9C4A00C65448 /* NavigationBarAuToAlphaForTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarAuToAlphaForTableVC.m; sourceTree = "<group>"; };
 		18C829241F0E6AF60094036A /* BillingInstructionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillingInstructionsVC.h; sourceTree = "<group>"; };
 		18C829251F0E6AF60094036A /* BillingInstructionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillingInstructionsVC.m; sourceTree = "<group>"; };
 		5D5FFA2E43A936336DED4225 /* Pods-LuckyUmbrella.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuckyUmbrella.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuckyUmbrella/Pods-LuckyUmbrella.debug.xcconfig"; sourceTree = "<group>"; };
@@ -205,6 +214,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18044D421F20D7B600E1702F /* DestinationSearchVC */ = {
+			isa = PBXGroup;
+			children = (
+				18044D431F20D7CE00E1702F /* DestinationSearchVC.h */,
+				18044D441F20D7CE00E1702F /* DestinationSearchVC.m */,
+				18044D461F20DA1200E1702F /* DestinationSearchCell.h */,
+				18044D471F20DA1200E1702F /* DestinationSearchCell.m */,
+			);
+			path = DestinationSearchVC;
+			sourceTree = "<group>";
+		};
 		E915F61B1EE7CCB3006DB91A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +305,7 @@
 		E9EF91131F0367BC00E1CE3A /* MainVC */ = {
 			isa = PBXGroup;
 			children = (
+				18044D421F20D7B600E1702F /* DestinationSearchVC */,
 				E9EF911D1F0367BC00E1CE3A /* MainMapVC */,
 				E9EF91221F0367BC00E1CE3A /* MainSetView */,
 				E9EF91371F0367BC00E1CE3A /* MyScheduleVC */,
@@ -461,6 +482,8 @@
 				E9EF916D1F03687200E1CE3A /* SpecialTextField.m */,
 				E9EF916E1F03687200E1CE3A /* SpecialView.h */,
 				E9EF916F1F03687200E1CE3A /* SpecialView.m */,
+				182BD5EF1F1F9C4A00C65448 /* NavigationBarAuToAlphaForTableVC.h */,
+				182BD5F01F1F9C4A00C65448 /* NavigationBarAuToAlphaForTableVC.m */,
 			);
 			path = StoryBoardTool;
 			sourceTree = "<group>";
@@ -708,8 +731,10 @@
 				E9EF914A1F0367BC00E1CE3A /* MainSet.m in Sources */,
 				E9EF91791F03687200E1CE3A /* NSDate+Extension.m in Sources */,
 				E9EF91461F0367BC00E1CE3A /* InvitingFriendsVC.m in Sources */,
+				18044D481F20DA1200E1702F /* DestinationSearchCell.m in Sources */,
 				18C829261F0E6AF60094036A /* BillingInstructionsVC.m in Sources */,
 				E9EF91561F0367BC00E1CE3A /* NewsVC.m in Sources */,
+				18044D451F20D7CE00E1702F /* DestinationSearchVC.m in Sources */,
 				E9EF914F1F0367BC00E1CE3A /* ScanCode.m in Sources */,
 				E9EF91541F0367BC00E1CE3A /* MyScheduleVC.m in Sources */,
 				E9EF91521F0367BC00E1CE3A /* MyScheduleCVCell.m in Sources */,
@@ -723,6 +748,7 @@
 				E973E2241F04FF2F00557886 /* NewsDetailVC.m in Sources */,
 				E9EF91441F0367BC00E1CE3A /* CouponVC.m in Sources */,
 				E9EF91511F0367BC00E1CE3A /* MyNewsVC.m in Sources */,
+				182BD5F11F1F9C4A00C65448 /* NavigationBarAuToAlphaForTableVC.m in Sources */,
 				E9BA3D381EE547CC00B6A740 /* main.m in Sources */,
 				E9EF914C1F0367BC00E1CE3A /* PasswordUnlocked.m in Sources */,
 			);

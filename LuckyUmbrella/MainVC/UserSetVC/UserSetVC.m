@@ -8,8 +8,6 @@
 
 #import "UserSetVC.h"
 
-#define RealHeight (self.tableView.height - 64)
-
 @interface UserSetVC () <UploadImageDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *LogoutView;
@@ -21,8 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,21 +53,21 @@
     
     if (indexPath.row == 0) {
         
-        return RealHeight * 0.3;
+        return self.tableView.height * 0.3;
         
     } else if (indexPath.row == 7) {
         
-        return RealHeight * 0.04;
+        return self.tableView.height * 0.04;
         
     }
     
-    return RealHeight * 0.07;
+    return self.tableView.height * 0.07;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    return RealHeight * 0.1;
+    return self.tableView.height * 0.1;
     
 }
 

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserSetVC : UITableViewController
+@interface UserSetVC : NavigationBarAuToAlphaForTableVC
 
 @end
